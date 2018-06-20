@@ -94,13 +94,14 @@ namespace LICServer
                 sqlQuery = "SELECT * FROM Catalog";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
                 adapter.Fill(dTable);
+                dgvViewer.DataSource = dTable;
 
                 if (dTable.Rows.Count > 0)
                 {
-                    dgvViewer.Rows.Clear();
+                    //dgvViewer.Rows.Clear();
 
-                    for (int i = 0; i < dTable.Rows.Count; i++)
-                        dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
+                    //for (int i = 0; i < dTable.Rows.Count; i++)
+                    //    dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
                 }
                 else
                     MessageBox.Show("Database is empty");

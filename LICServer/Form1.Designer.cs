@@ -77,10 +77,11 @@
             // 
             // dgvViewer
             // 
+            this.dgvViewer.AllowUserToOrderColumns = true;
             this.dgvViewer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewer.Location = new System.Drawing.Point(12, 101);
+            this.dgvViewer.Location = new System.Drawing.Point(12, 41);
             this.dgvViewer.Name = "dgvViewer";
-            this.dgvViewer.Size = new System.Drawing.Size(776, 324);
+            this.dgvViewer.Size = new System.Drawing.Size(776, 384);
             this.dgvViewer.TabIndex = 4;
             // 
             // Form1
