@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
+using Microsoft.Win32;
 
 namespace LICServer
 {
@@ -34,6 +35,44 @@ namespace LICServer
             dbFileName = "sample.sqlite";
         }
 
+
+        /// <summary>
+        /// Get Unique ID
+        /// </summary>
+
+        public string GetMachineGuid()
+        {
+            string location = @"SOFTWARE\Microsoft\Cryptography";
+            string name = "MachineGuid";
+
+            using (RegistryKey localMachineX64View =
+                RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            {
+                using (RegistryKey rk = localMachineX64View.OpenSubKey(location))
+                {
+                    if (rk == null)
+                        throw new KeyNotFoundException(
+                            string.Format("Key Not Found: {0}", location));
+
+                    object machineGuid = rk.GetValue(name);
+                    if (machineGuid == null)
+                        throw new IndexOutOfRangeException(
+                            string.Format("Index Not Found: {0}", name));
+
+                    return machineGuid.ToString();
+                }
+            }
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            MessageBox.Show("Generated HWID:\n" + GetMachineGuid() );
+        }
+
+
+
         private void createBtn_Click(object sender, EventArgs e)
         {
             if (!File.Exists(dbFileName))
@@ -45,7 +84,7 @@ namespace LICServer
                 m_dbConn.Open();
                 m_sqlCmd.Connection = m_dbConn;
 
-                m_sqlCmd.CommandText = "CREATE TABLE IF NOT EXISTS Catalog (id INTEGER PRIMARY KEY AUTOINCREMENT, author TEXT, book TEXT)";
+                m_sqlCmd.CommandText = "CREATE TABLE IF NOT EXISTS Catalog (id INTEGER PRIMARY KEY AUTOINCREMENT, HWID TEXT, LIC INTEGER)";
                 m_sqlCmd.ExecuteNonQuery();
 
                 label1.Text = "Connected";
@@ -111,6 +150,8 @@ namespace LICServer
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+
     }
 
     public class Prod

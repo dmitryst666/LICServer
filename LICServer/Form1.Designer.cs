@@ -33,6 +33,7 @@
             this.connDB = new System.Windows.Forms.Button();
             this.readBtn = new System.Windows.Forms.Button();
             this.dgvViewer = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +85,22 @@
             this.dgvViewer.Size = new System.Drawing.Size(776, 384);
             this.dgvViewer.TabIndex = 4;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(596, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(192, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Generate HWID";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvViewer);
             this.Controls.Add(this.readBtn);
             this.Controls.Add(this.connDB);
@@ -110,6 +122,7 @@
         private System.Windows.Forms.Button connDB;
         private System.Windows.Forms.Button readBtn;
         private System.Windows.Forms.DataGridView dgvViewer;
+        private System.Windows.Forms.Button button1;
     }
 }
 
